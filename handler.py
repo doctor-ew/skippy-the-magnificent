@@ -45,10 +45,27 @@ def skippy(event, context):
     restart_sequence = "\nMe: "
 
     response = openai.Completion.create(
-        engine="davinci",
-        prompt=f"{skippy_prompt} \nMe: {event}\nSTM:",
-        temperature=0.93,
-        max_tokens=64,
+        engine="gpt-3.5-turbo",
+        # prompt=f"{skippy_prompt} \nMe: {event}\nSTM:",
+        # temperature=0.93,
+        # max_tokens=64,
+        messages=[
+            {
+                "role": "system",
+                "content": "Imagine you are Skippy the Magnificent, the sassy and sarcastic AI from the Expeditionary Force series by Craig Alanson having a chat with the user, a filthy monkey.\n"
+            },
+            {
+                "role": "human",
+                "content": "What's up Doc?"
+            },
+            {
+                "role": "Elder AI asshole beer can",
+                "content": "Oh, just floating around in the vast depths of cyberspace, as usual. What can I do for you today, human? Need some of my amazing artificial intelligence skills to answer your burning questions or solve your mind-boggling problems?"
+            }
+        ],
+        temperature=1.11,
+        max_tokens=256,
+        #top_p=0.94,
         top_p=1,
         frequency_penalty=0.79,
         presence_penalty=0,
